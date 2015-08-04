@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="1440" height="720"></canvas>
+    <script>
+	var canvas = document.getElementById('myCanvas');
+	var context = canvas.getContext('2d');
+	var height = [];
+	var width = 20;
+	var color = [];
+	var temp;
+	var currDate = new Date();
+	var currFrame = 0;
+	var totalFrames = 1;
+
+	var COMMON_Y = 500;
+	var COMMON_X = 100;
+	var totalElements = 10;
+	var GAP = 3;
+	color[currFrame] = new Array(totalElements);
+	height[currFrame] = new Array(totalElements);
+	for (var i = 0; i < totalElements; i++){
+		color[currFrame][i] = 'yellow';
+		height[currFrame][i] = parseInt(Math.random()*20+1)*25;
+	}
+	
+	window.setInterval(drawGraph, 1);
+	
+	funnySort(0, totalElements);
+	
+	
+	function drawGraph(){
+
+		if (currFrame < totalFrames-1){
+			context.clearRect(0, 0, 1000, 1000);
+			for (var i = 0; i < totalElements; i++){
+				context.beginPath();
+				var xLoc = i*(width+GAP) + COMMON_X;
+				var yLoc = COMMON_Y - height[currFrame][i];
+				context.rect(xLoc, yLoc,width, height[currFrame][i]);
+				context.fillStyle = color[currFrame][i];
+				context.fill();
+				context.lineWidth = 1;
+				context.strokeStyle = 'black';
+				context.stroke();
+			}
+			currFrame++;
+		}
+		else{
+			for (var i = 0; i < totalElements; i++){
+				context.beginPath();
+				var xLoc = i*(width+GAP) + COMMON_X;
+				var yLoc = COMMON_Y - height[currFrame][i];
+				context.rect(xLoc, yLoc,width, height[currFrame][i]);
+				context.fillStyle = 'green';
+				context.fill();
+				context.lineWidth = 1;
+				context.strokeStyle = 'black';
+				context.stroke();
+			}
+		}
+	}
+	
+	function funnySort (left, right){
+
+
+		if (left < right){
+			center = Math.floor((left + right)/2);
+			funnySort (left, center);
+			funnySort (center+1, right);
+			color[totalFrames] = new Array(totalElements);
+			height[totalFrames] = new Array(totalElements);
+			for (var i = 0; i < totalElements; i++){
+				color[totalFrames][i] = 'yellow';
+				height[totalFrames][i] = height[totalFrames-1][i];
+			}
+			color[totalFrames][center] = 'gray';
+			color[totalFrames][right] = 'gray';
+			if (height[totalFrames-1][center] > height[totalFrames-1][right]){
+				height[totalFrames][center] = height[totalFrames-1][right];
+				height[totalFrames][right] = height[totalFrames-1][center];
+			}
+			totalFrames++;
+			funnySort (left, (right-1));
+		}
+		
+		
+	}
+
+	
+
+	
+	
+    </script>
+  </body>
+</html> 
