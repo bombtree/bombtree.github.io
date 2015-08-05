@@ -1,104 +1,60 @@
 <!DOCTYPE HTML>
 <html>
   <head>
+
     <style>
       body {
         margin: 0px;
         padding: 0px;
       }
+	  #animations{
+		float:left;
+		padding:5px;
+	  }
+	  #controls{
+		float:left;
+		padding-top:200px;
+	  }
+	  inputLabel{
+		display: inline-block;
+		float: left;
+		clear: left;
+		width: 250px;
+		text-align: left;
+	  }
+	  input{
+	    display: inline-block;
+		float:left;
+		width: 100px;
+	  }
     </style>
   </head>
   <body>
-    <canvas id="myCanvas" width="1440" height="720"></canvas>
-    <script>
-	var canvas = document.getElementById('myCanvas');
-	var context = canvas.getContext('2d');
-	var height = [];
-	var width = 20;
-	var color = [];
-	var temp;
-	var currDate = new Date();
-	var currFrame = 0;
-	var totalFrames = 1;
+	<div id = "animations">
+		<h2>Funny Sort</h2>
+		<h3>A terrible, inefficient algorithm for demo purposes only.</h3>
+		<canvas id="funny" width="200" height="200"></canvas>
+		<br>
+		<h2>Bubble Sort</h2>
+		<h3>Baby's first sorting algorithm. </h3>
+		<p><i>&#34So simple, that only a child can do it.&#34</i>
+		<br>-Tom Lehrer</p>
+		<canvas id="bubble" width="200" height="200"></canvas>
+		<br>
+	</div>
+	<div id = "controls">
+		<form id = "sortStats">
+			<p>
+			<inputLabel>Number of elements to sort:</inputLabel> <input type = "number" id = "numOfElements" size = "30" min = "1" max = "15">
+			</p>
+			<p>
+			<inputLabel>Length of frame in ms:</inputLabel><input type = "number" id = "frameLength" size = "30" min = "1" max = "1000">
+			</p>
+		</form>
+		<inputLabel><button onclick="animateBubble(); animateFunny();"> run </button></inputLabel>
+	</div>
 
-	var COMMON_Y = 500;
-	var COMMON_X = 100;
-	var totalElements = 10;
-	var GAP = 3;
-	color[currFrame] = new Array(totalElements);
-	height[currFrame] = new Array(totalElements);
-	for (var i = 0; i < totalElements; i++){
-		color[currFrame][i] = 'yellow';
-		height[currFrame][i] = parseInt(Math.random()*20+1)*25;
-	}
-	
-	window.setInterval(drawGraph, 1);
-	
-	funnySort(0, totalElements);
-	
-	
-	function drawGraph(){
-
-		if (currFrame < totalFrames-1){
-			context.clearRect(0, 0, 1000, 1000);
-			for (var i = 0; i < totalElements; i++){
-				context.beginPath();
-				var xLoc = i*(width+GAP) + COMMON_X;
-				var yLoc = COMMON_Y - height[currFrame][i];
-				context.rect(xLoc, yLoc,width, height[currFrame][i]);
-				context.fillStyle = color[currFrame][i];
-				context.fill();
-				context.lineWidth = 1;
-				context.strokeStyle = 'black';
-				context.stroke();
-			}
-			currFrame++;
-		}
-		else{
-			for (var i = 0; i < totalElements; i++){
-				context.beginPath();
-				var xLoc = i*(width+GAP) + COMMON_X;
-				var yLoc = COMMON_Y - height[currFrame][i];
-				context.rect(xLoc, yLoc,width, height[currFrame][i]);
-				context.fillStyle = 'green';
-				context.fill();
-				context.lineWidth = 1;
-				context.strokeStyle = 'black';
-				context.stroke();
-			}
-		}
-	}
-	
-	function funnySort (left, right){
-
-
-		if (left < right){
-			center = Math.floor((left + right)/2);
-			funnySort (left, center);
-			funnySort (center+1, right);
-			color[totalFrames] = new Array(totalElements);
-			height[totalFrames] = new Array(totalElements);
-			for (var i = 0; i < totalElements; i++){
-				color[totalFrames][i] = 'yellow';
-				height[totalFrames][i] = height[totalFrames-1][i];
-			}
-			color[totalFrames][center] = 'gray';
-			color[totalFrames][right] = 'gray';
-			if (height[totalFrames-1][center] > height[totalFrames-1][right]){
-				height[totalFrames][center] = height[totalFrames-1][right];
-				height[totalFrames][right] = height[totalFrames-1][center];
-			}
-			totalFrames++;
-			funnySort (left, (right-1));
-		}
-		
-		
-	}
-
-	
-
-	
-	
-    </script>
+	<script src = "sorting/bubblesort.js"></script>
+	<script src = "sorting/funnysort.js"></script>
   </body>
 </html> 
