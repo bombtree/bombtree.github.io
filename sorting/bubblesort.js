@@ -1,23 +1,20 @@
-
 var bubbleCanvas = document.getElementById("bubble");
 var bubbleContext = bubbleCanvas.getContext('2d');
+
 var height = [];
 var width = 5;
 var color = [];
 var temp;
-var currDate = new Date();
 var currFrame = 0;
 var totalFrames = 1;
 var totalElements = 10;
 var msPerFrame;
 
-var COMMON_Y = 190;
-var COMMON_X = 100;
-var GAP = 3;
-
 
 
 function animateBubble(){
+
+
 
 	
 	totalElements = parseInt(document.getElementById("numOfElements").value);
