@@ -10,9 +10,7 @@ var funnyTotalFrames = 1;
 var funnyTotalElements = 10;
 var msPerFrame;
 
-var COMMON_Y = 190;
-var COMMON_X = 100;
-var GAP = 3;
+
 
 
 
@@ -29,7 +27,7 @@ function animateFunny(){
 	
 	for (var i = 0; i < funnyTotalElements; i++){
 		funnyColor[funnyFrame][i] = 'yellow';
-		funnyHeight[funnyFrame][i] = parseInt(Math.random()*20+1)*9;
+		funnyHeight[funnyFrame][i] = commonHeight[i];
 	}
 	
 	window.setInterval(drawGraph, msPerFrame);

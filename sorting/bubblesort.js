@@ -24,7 +24,7 @@ function animateBubble(){
 	height[currFrame] = new Array(totalElements);
 	for (var i = 0; i < totalElements; i++){
 		color[currFrame][i] = 'yellow';
-		height[currFrame][i] = parseInt(Math.random()*20+1)*9;
+		height[currFrame][i] = commonHeight[i];
 	}
 	
 	window.setInterval(drawGraph, msPerFrame);
