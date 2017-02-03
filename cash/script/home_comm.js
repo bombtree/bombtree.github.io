@@ -5,7 +5,7 @@ function getStatus(){
 			document.getElementById("statusDis").innerHTML = this.responseText;
 		}
 	};
-	xhttp.open("GET", "script/currStatus.txt", true);
+	xhttp.open("GET", "http://bombtree.github.io/cash/script/currStatus.txt", true);
 	xhttp.send();
 	
 }
