@@ -5,7 +5,7 @@ function getStatus(){
 			document.getElementById("statusDis").innerHTML = this.responseText;
 		}
 	};
-	http.open("GET", "currStatus.txt", true);
-	http.send();
+	xhttp.open("GET", "currStatus.txt", true);
+	xhttp.send();
 	
 }
